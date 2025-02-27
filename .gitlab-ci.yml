@@ -1,0 +1,52 @@
+image: node:latest
+cache:
+  paths:
+    - node_modules/
+
+stages: # List of stages for jobs, and their order of execution
+  - build
+  - test
+  - package
+
+node-build-job:
+  stage: build
+  before_script:
+    - npm ci
+  script:
+    - npm run build
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - build
+
+lint-test-job: # This job also runs in the test stage.
+  stage: test # It can run at the same time as unit-test-job (in parallel).
+  script:
+    - npm run lint
+
+package:
+  stage: package
+  image: docker:stable
+  before_script:
+    - docker info
+  services:
+    - docker:dind
+  variables:
+    DOCKER_IMAGE_NAME: $CI_PROJECT_NAME:$CI_COMMIT_REF_SLUG
+  dependencies:
+    - node-build-job
+  script:
+    - export DOCKER_HOST=tcp://docker:2375/
+    - docker build -t "$DOCKER_IMAGE_NAME" .
+    - docker save "$DOCKER_IMAGE_NAME" > $DOCKER_IMAGE_NAME.tar
+    - |
+      if [[ "$CI_COMMIT_BRANCH" == "$CI_DEFAULT_BRANCH" ]]; then
+        docker tag "$DOCKER_IMAGE_NAME" "$CI_PROJECT_NAME:latest"
+        # docker push "$CI_PROJECT_NAME:latest"
+      fi
+  artifacts:
+    paths:
+      - $DOCKER_IMAGE_NAME.tar
+  only:
+    - main
+    - tags

@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+  --primary: #064c88;
+  --primary-light: rgba(19, 105, 171, 0.16);
+  --secondary: #FFEC22;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+/* body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+} */
+
+.MuiButton-outlinedPrimary{
+  text-transform: none;
+}
+.MuiButton-contained{
+  background-color: var(--primary);
+  box-shadow: none;
+  text-transform: none;
+}
+.MuiButton-contained:hover{
+  box-shadow: none;
+}
+
+.color-primary{
+  color: var(--primary);
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;  
+  padding-bottom: 40px !important;
+}
+.award-swiper{
+  padding-bottom: 0px !important;
+}
+.award-swiper .swiper-button-prev, .award-swiper .swiper-button-next{
+  height: 100%;
+  top: 0;
+  margin-top: 0;
+  /* width: 40px; */
+}
+.award-swiper .swiper-button-prev{
+  left: 0;
+  /* background-image: linear-gradient(
+    to right,
+    rgba(238, 242, 246, 0.9),
+    rgba(238, 242, 246, 0.3)
+    ); */
+}
+.award-swiper .swiper-button-next{
+  right: 0;
+  /* background-image: linear-gradient(
+    to left,
+    rgba(238, 242, 246, 0.9),
+    rgba(238, 242, 246, 0.3)
+    ); */
+}
+.award-swiper .swiper-button-prev:after, .award-swiper .swiper-button-next:after{
+  font-size: 18px !important;
+  color: var(--primary);
+}
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.swiper-pagination{
+  text-align: left !important;
+}
+.swiper-pagination-bullet{
+  background: #fff !important;
+  opacity: 0.5 !important;
+}
+.swiper-pagination-bullet-active{
+  background: #fff !important;
+  opacity: 1 !important;
+}
+
+footer::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  border-top: 1px solid #e5e7eb;
+}

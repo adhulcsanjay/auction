@@ -1,0 +1,22 @@
+.intro-card{
+    position: relative;
+}
+.intro-card::after {
+    content: "";
+    position: absolute;
+    width: 157px;
+    height: 157px;
+    background: rgb(144, 202, 249);
+    border-radius: 50%;
+    top: -105px;
+    right: -96px;
+}
+.intro-title{
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--primary);
+    margin-bottom: 10px;
+    padding-right: 60px;
+}
+
+
